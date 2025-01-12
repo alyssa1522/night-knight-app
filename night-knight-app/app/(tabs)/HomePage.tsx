@@ -1,73 +1,113 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-
-export default function HomeScreen() {
+const HomePage = () => {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/shutterstock_616968842-scaled.jpg')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome to Night Knight!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Download the App!</ThemedText>
-        <ThemedText>
-          Get the app from the 
-          <ThemedText type="defaultSemiBold">App Store (Apple) or the Play Store</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Add emergency contacts</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Stay Safe!</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <ImageBackground
+      source={require('./images/home-page-bg.png')}
+      style={styles.background}
+    >
+      {/* Logo */}
+      <Image
+        source={require('./images/Night-Knight.png')}
+        style={styles.logo}
+        resizeMode="cover"
+      />
+
+      {/* Tagline Text */}
+      <Text style={styles.tagline}>
+        Keeping loved ones safe through the night.
+      </Text>
+
+      {/* Footer buttons with icons */}
+      <View style={styles.footer}>
+        <View style={styles.iconButton}>
+          <Image
+            source={require('./images/alert-icon.png')} // Replace with your alert icon path
+            style={styles.icon}
+          />
+          <Text style={styles.iconText}>Alert</Text>
+        </View>
+        <View style={styles.iconButton}>
+          <Image
+            source={require('./images/log-icon.png')} // Replace with your log icon path
+            style={styles.icon}
+          />
+          <Text style={styles.iconText}>Activity Log</Text>
+        </View>
+        <View style={styles.iconButton}>
+          <Image
+            source={require('./images/contact-icon.png')} // Replace with your contact icon path
+            style={styles.icon}
+          />
+          <Text style={styles.iconText}>Contacts</Text>
+        </View>
+        <View style={styles.iconButton}>
+          <Image
+            source={require('./images/settings-icon.png')} // Replace with your settings icon path
+            style={styles.icon}
+          />
+          <Text style={styles.iconText}>Settings</Text>
+        </View>
+      </View>
+    </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  background: {
+    width: 390,
+    height: 846.33,
+    flexShrink: 0,
+    paddingBottom: -2.3, // As per the layout
+    backgroundColor: 'lightgray', // Fallback color
+  },
+  logo: {
+    width: 363,
+    height: 130,
+    flexShrink: 0,
+    marginTop: 272, // Padding from top
+    marginLeft: 14,
+    marginRight: 13,
+    marginBottom: 442,
+  },
+  tagline: {
+    width: 311,
+    height: 65,
+    flexShrink: 0,
+    paddingLeft: 16,
+    paddingRight: 20,
+    color: '#FFF',
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
+    fontFamily: 'Livvic', // Ensure the font is loaded or use a fallback
+    fontSize: 16,
+    fontWeight: '500',
+    lineHeight: 20,
+    textAlign: 'center', // Adjust text alignment
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 50, // Adjust as needed
     flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '100%',
+    paddingHorizontal: 20,
+  },
+  iconButton: {
     alignItems: 'center',
-    gap: 8,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  icon: {
+    width: 50,
+    height: 50, // Adjust based on your icon size
+    marginBottom: 5, // Space between icon and text
   },
-  reactLogo: {
-    height: 300,
-    width: 1400,
-    top: -50
+  iconText: {
+    color: '#FFF',
+    fontSize: 12,
+    fontWeight: '500',
   },
 });
+
+export default HomePage;
